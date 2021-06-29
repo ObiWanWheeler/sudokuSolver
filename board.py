@@ -1,5 +1,6 @@
 from gui import GUI
-
+import pygame
+pygame.init()
 
 class Board:
     def __init__(self):
@@ -14,6 +15,9 @@ class Board:
             self.rows.append(list(map(int, i.split())))
 
         self.changeable = [[cell == 0 for cell in row] for row in self.rows]
+        self.clock = pygame.time.Clock()
+        self.fps = 1
+        self.gui = GUI()
 
     def show_board(self):
         print()
@@ -42,6 +46,9 @@ class Board:
                     self.show_board()
                     break
                 self.find_next_changeable()
+            self.gui.check_events()
+            self.gui.show(self.rows)
+            self.clock.tick(self.fps)
 
     def find_next_changeable(self):
         self.set_next_coord()
