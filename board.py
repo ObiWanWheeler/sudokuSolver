@@ -16,7 +16,7 @@ class Board:
 
         self.changeable = [[cell == 0 for cell in row] for row in self.rows]
         self.clock = pygame.time.Clock()
-        self.fps = 1
+        self.fps = 20
         self.gui = GUI()
 
     def show_board(self):
@@ -30,7 +30,6 @@ class Board:
         while True:
             # increment cell by 1
             self.rows[self.current_row][self.current_col] += 1
-            self.show_board()
             self.count += 1
             # if cell is 10, move to last cell
             if self.rows[self.current_row][self.current_col] > 9:
@@ -47,7 +46,7 @@ class Board:
                     break
                 self.find_next_changeable()
             self.gui.check_events()
-            self.gui.show(self.rows)
+            self.gui.show(self.rows, self.current_col, self.current_row, self.changeable)
             self.clock.tick(self.fps)
 
     def find_next_changeable(self):
