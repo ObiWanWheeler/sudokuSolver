@@ -121,5 +121,3 @@ class Board:
         if sum(x) != 45:
             return False
         return True
-
-
